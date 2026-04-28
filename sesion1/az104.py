@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from agent_framework import Agent
 from agent_framework.openai import OpenAIChatCompletionClient
@@ -6,13 +7,14 @@ from azure.identity.aio import AzureCliCredential
 
 
 async def main() -> None:
-    credential = AzureCliCredential()
+    api_key = os.getenv("AZURE_OPENAI_API_KEY")
+    #credential = AzureCliCredential()
     try:
         client = OpenAIChatCompletionClient(
             azure_endpoint="https://curso-ia-openai.openai.azure.com/",
             model="gpt-4o",             
             api_version="2024-10-21",
-            credential=credential,
+            api_key=api_key,
         )
 
         agent = Agent(
@@ -24,7 +26,8 @@ async def main() -> None:
         result = await agent.run("Explica en una frase el papel de Microsoft Agent Framework.")
         print(result)
     finally:
-        await credential.close()
+        pass
+        #await credential.close()
 
 
 if __name__ == "__main__":

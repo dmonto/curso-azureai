@@ -1,1 +1,4 @@
 .venv
+.env
+checkpoints
+sesion2/*pycache*
