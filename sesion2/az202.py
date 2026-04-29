@@ -46,7 +46,7 @@ response = client.responses.create(
 
     reasoning={
         "effort": "medium",
-        "summary": "auto",
+        "summary": "concise",
     },
 
     text={

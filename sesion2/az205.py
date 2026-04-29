@@ -32,6 +32,7 @@ async def main() -> None:
     session = agent.create_session()
 
     nombre = input("Como te llamas? ")
+    session.state["nombre"] = nombre
     r1 = await agent.run(f"Mi nombre es {nombre}.", session=session)
     print(r1)
 
