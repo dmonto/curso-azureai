@@ -75,6 +75,7 @@ async def main() -> None:
 
     outputs: list[list[Message]] = []
     last_response_id: str | None = None
+    mensaje = ""
 
     async for event in workflow.run(
         "Diseña una estrategia de escalado para un agente de soporte con varias tools.",
@@ -87,15 +88,17 @@ async def main() -> None:
 
         if isinstance(data, AgentResponseUpdate):
             response_id = data.response_id
+            mensaje = mensaje + " " + data.text
 
             if response_id != last_response_id:
                 if last_response_id is not None:
                     print("\n")
 
-                print(f"\n--- {data.author_name} ---")
+                #print(f"\n--- {data.author_name} ---")
                 last_response_id = response_id
-
-            print(data.text, end="", flush=True)
+                
+                #print(mensaje, end="", flush=True)
+                mensaje = ""
 
         elif isinstance(data, list):
             print("\n\n===== Conversación parcial =====")
@@ -104,8 +107,8 @@ async def main() -> None:
                 author = getattr(message, "author_name", None) or getattr(message, "role", "unknown")
                 text = getattr(message, "text", "")
 
-                print(f"\n--- Mensaje {i} | {author} ---")
-                print(text)
+                #print(f"\n--- Mensaje {i} | {author} ---")
+                #print(text)
                 outputs.append(text)
 
     if not outputs:

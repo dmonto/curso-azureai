@@ -83,7 +83,7 @@ async def main() -> None:
     )
 
     events = await workflow.run(
-        "Tengo un error al conectarme por VPN desde casa."
+        "El cliente no ha recibido la factura porque no tiene password."
     )
     for event in events:
         print("=" * 80)
