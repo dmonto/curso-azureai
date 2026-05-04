@@ -6,7 +6,9 @@ from azure.ai.projects.models import (
     MemoryStoreDefaultDefinition,
     MemoryStoreDefaultOptions,
 )
+from dotenv import load_dotenv
 
+load_dotenv("../.env")
 
 def require_env(name: str) -> str:
     value = os.getenv(name)

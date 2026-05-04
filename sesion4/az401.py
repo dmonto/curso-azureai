@@ -78,7 +78,7 @@ def retrieve_candidates(
         filter_expression = f"domain eq '{domain_filter}'"
 
     results = search_client.search(
-        search_text=query,
+#        search_text=query,
         vector_queries=[vector_query],
         filter=filter_expression,
         query_type="semantic",
@@ -134,6 +134,7 @@ def select_context(
     used_chars = 0
 
     for chunk in sorted_chunks:
+        print(chunk.score, chunk.reranker_score)
         if chunk.score < min_score:
             continue
 
