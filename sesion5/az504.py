@@ -1,11 +1,15 @@
 import os
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
+from dotenv import load_dotenv
+
+load_dotenv("../.env")
+endpoint="https://curso-ia-openai-responses.services.ai.azure.com/api/projects/responses-project"
 
 user_id = os.environ["USER_ID"]
 
 project_client = AIProjectClient(
-    endpoint=os.environ["FOUNDRY_PROJECT"],
+    endpoint=endpoint,
     credential=DefaultAzureCredential(exclude_interactive_browser_credential=False),
 )
 

@@ -2,7 +2,9 @@ import os
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import MemorySearchOptions
+from dotenv import load_dotenv
 
+load_dotenv("../.env")
 
 PROJECT_ENDPOINT = os.environ["FOUNDRY_PROJECT"]
 MEMORY_STORE_NAME = os.environ["FOUNDRY_MEMORY_STORE_NAME"]

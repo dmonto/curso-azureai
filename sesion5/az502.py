@@ -30,7 +30,7 @@ for store in stores:
     print("DESCRIPTION:", getattr(store, "description", None))
     print("DEFINITION:", getattr(store, "definition", None))
     print("-" * 80)
-    
+'''
 memory_store_name = "support_agent_memory"
 
 options = MemoryStoreDefaultOptions(
@@ -58,3 +58,4 @@ memory_store = project_client.beta.memory_stores.create(
 print("Memory store creado:")
 print("Name:", memory_store.name)
 print("Description:", memory_store.description)
+'''

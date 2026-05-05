@@ -14,7 +14,7 @@ memory_store_name = os.environ["FOUNDRY_MEMORY_STORE_NAME"]
 memory_tool = MemorySearchPreviewTool(
     memory_store_name=memory_store_name,
     scope="{{$userId}}",
-    update_delay=1,  # 5 minutos de inactividad antes de consolidar memoria
+    update_delay=1,  
 )
 
 agent = project_client.agents.create_version(
