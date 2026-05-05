@@ -1,0 +1,54 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnKnowledgeRequested
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendActivity_debug
+      activity: "🔎 Consultando conocimiento personalizado para: {System.SearchQuery}"
+
+    - kind: HttpRequestAction
+      id: callKnowledgeBackend
+      method: Post
+      url: https://annalee-unavailing-gingerly.ngrok-free.dev/knowledge
+      headers:
+        Content-Type: application/json
+        x-backend-secret: dev-secret
+
+      body:
+        kind: JsonRequestContent
+        content: |-
+          ={
+            user_id: "copilot-user",
+            project_key: "ALFA",
+            search_query: System.SearchQuery,
+            max_results: 5
+          }
+
+      response: Topic.KnowledgeResponse
+      responseSchema:
+        kind: Record
+        properties:
+          applied_filters:
+            type:
+              kind: Record
+              properties:
+                project_key: String
+
+          snippets:
+            type:
+              kind: Table
+              properties:
+                content: String
+                score: Number
+                source: String
+                title: String
+                url: String
+
+    - kind: SetVariable
+      id: setSearchResults
+      variable: System.SearchResults
+      value: "=ForAll(Topic.KnowledgeResponse.snippets,{Content: content, ContentLocation: url, Title: title})"
+
+inputType: {}
+outputType: {}
