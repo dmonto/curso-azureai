@@ -2,3 +2,5 @@
 .env
 checkpoints
 **/*pycache*
+*.jsonl
+*.json
